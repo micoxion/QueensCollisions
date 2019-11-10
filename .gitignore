@@ -33,5 +33,7 @@
 *.app
 
 #Debug and Release
-*/Debug/*
-*/Release/*
+Debug/*
+Release/*
+Queen*Collisions/Debug/*
+Queen*Collisions/Release/*
