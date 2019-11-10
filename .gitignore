@@ -35,3 +35,5 @@
 #Debug and Release
 Debug/*
 Release/*
+"Queen Collisions"/Debug/*
+"Queen Collisions"/Release/*
