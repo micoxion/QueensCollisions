@@ -1,0 +1,5 @@
+﻿  collision.cpp
+C:\Users\msoto3\source\repos\Queen Collisions\Queen Collisions\collision.cpp(22,13): warning C4326:  return type of 'main' should be 'int' instead of 'void'
+C:\Users\msoto3\source\repos\Queen Collisions\Queen Collisions\collision.cpp(45,22): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\msoto3\source\repos\Queen Collisions\Queen Collisions\collision.cpp(46,27): warning C4018:  '<': signed/unsigned mismatch
+  Queen Collisions.vcxproj -> C:\Users\msoto3\source\repos\Queen Collisions\Debug\Queen Collisions.exe
