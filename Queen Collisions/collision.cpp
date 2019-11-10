@@ -25,7 +25,7 @@ void main() {
 	if (fin.is_open()) {
 		ofstream fout("collision.out");
 		vector<position> queenPositions;
-		vector<int> matchedX, matchedY, matchedD;
+		vector<int> matchedX, matchedY, matchedNESW, matchedNWSE;
 		int boardSize, patternCount, k, x, y, s, t, matchY, matchX, matchDiagonal, collisions;
 
 		fin >> boardSize >> patternCount;
@@ -43,7 +43,13 @@ void main() {
 		}
 
 		while (boardSize != 0) {
-			matchY = 0, matchX = 0, matchDiagonal = 0;
+			matchY = 0;
+			matchX = 0;
+			matchDiagonal = 0;
+			matchedX.clear();
+			matchedNESW.clear();
+			matchedNWSE.clear();
+			matchedY.clear();
 			for (int i = 0; i < queenPositions.size(); i++) {
 				for (int j = i + 1; j < queenPositions.size(); j++) {
 					if (queenPositions[i].x == queenPositions[j].x && std::find(matchedX.begin(), matchedX.end(), j) == matchedX.end()) {
@@ -54,13 +60,26 @@ void main() {
 						matchY++;
 						matchedY.push_back(j);
 					}
-					else if (abs(queenPositions[i].y - queenPositions[j].y) == abs(queenPositions[i].x - queenPositions[j].x) && std::find(matchedD.begin(), matchedD.end(), j) == matchedD.end()) {
+					
+					else if (abs(queenPositions[i].y - queenPositions[j].y) == abs(queenPositions[i].x - queenPositions[j].x) && 
+						((queenPositions[i].y - queenPositions[j].y < 0 && queenPositions[i].x - queenPositions[j].x < 0) ||
+						(queenPositions[i].y - queenPositions[j].y > 0 && queenPositions[i].x - queenPositions[j].x > 0)) && 
+						std::find(matchedNESW.begin(), matchedNESW.end(), j) == matchedNESW.end()) {
 						matchDiagonal++;
-						matchedD.push_back(j);
+						matchedNESW.push_back(j);
+					}
+					else if (abs(queenPositions[i].y - queenPositions[j].y) == abs(queenPositions[i].x - queenPositions[j].x) && 
+						((queenPositions[i].y - queenPositions[j].y < 0 && queenPositions[i].x - queenPositions[j].x > 0) ||
+						(queenPositions[i].y - queenPositions[j].y > 0 && queenPositions[i].x - queenPositions[j].x < 0)) &&
+						std::find(matchedNWSE.begin(), matchedNWSE.end(), j) == matchedNWSE.end()) {
+						matchDiagonal++;
+						matchedNWSE.push_back(j);
 					}
 				}
 			}
 			collisions = matchY + matchX + matchDiagonal;
+			
+
 			queenPositions.clear();
 			fout << collisions;
 			fin >> boardSize >> patternCount;
